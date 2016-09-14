@@ -13,25 +13,22 @@ namespace MTG.Scores.Controllers
 
     public ActionResult Index()
     {
-      var matches = db.Matches.Include(m => m.Player1).Include(m => m.Player2).ToList();
       var players = db.Players.ToList();
 
       var rank = new List<RankingRecord>();
 
       foreach (var player in players)
       {
-        var games = matches.Where(x => x.Player1ID == player.ID || x.Player2ID == player.ID);
-        var wins = 
-          games.Where(
-            x =>
-              x.Player1ID == player.ID
-              ? x.Player1Score == 2 && x.Player1Score > x.Player2Score
-              : x.Player2Score == 2 && x.Player2Score > x.Player1Score
-          );
-        rank.Add(new RankingRecord { Matches = games.Count(), Wins = wins.Count(), Name = player.Name } );
+        var games = player.HomeMatches.Count + player.AwayMatches.Count;
+
+        var homeWins = player.HomeMatches.Where(x => x.Player1Score == 2 && x.Player1Score > x.Player2Score).Count();
+        var awayWins = player.AwayMatches.Where(x => x.Player2Score == 2 && x.Player2Score > x.Player1Score).Count();
+        var wins = homeWins + awayWins;
+
+        rank.Add(new RankingRecord { Matches = games, Wins = wins, Name = player.Name } );
       }
 
-      rank = rank.OrderByDescending(x => x.Wins).ToList();
+      rank = rank.OrderByDescending(x => x.Wins).ThenBy(x => x.Matches).ToList();
 
       return View(rank);
     }

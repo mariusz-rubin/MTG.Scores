@@ -8,9 +8,9 @@ namespace MTG.Scores.Models
   {
     public int ID { get; set; }
 
-    public int? Player1ID { get; set; }
+    public int Player1ID { get; set; }
 
-    public int? Player2ID { get; set; }
+    public int Player2ID { get; set; }
 
     [DisplayName("Wynik gracza 1")]
     [Range(0, 2)]
@@ -20,8 +20,10 @@ namespace MTG.Scores.Models
     [Range(0, 2)]
     public int Player2Score { get; set; }
 
+    [InverseProperty("HomeMatches")]
     public virtual Player Player1 { get; set; }
 
+    [InverseProperty("AwayMatches")]
     public virtual Player Player2 { get; set; }
   }
 }

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MTG.Scores.Models.Match>
+
+@{
+  ViewBag.Title = "Wyniki";
+}
+
+<div class="jumbotron">
+  <h1 class="text-center">@ViewBag.Title</h1>
+  <a href="@Url.Action("Create", "Scores")" class="btn btn-lg btn-success">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Dodaj mecz
+  </a>
+</div>
+
+<table class="table">
+  <tr>
+    <th>
+      Planeswalker 1
+    </th>
+    <th>
+      Wynik
+    </th>
+    <th>
+      Planeswalker 2
+    </th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        <span class="text-center">@Html.DisplayFor(modelItem => item.Player1.Name)</span>
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Player1Score) : @Html.DisplayFor(modelItem => item.Player2Score)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Player2.Name)
+      </td>
+      <td>
+        @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
+      </td>
+    </tr>
+  }
+
+</table>

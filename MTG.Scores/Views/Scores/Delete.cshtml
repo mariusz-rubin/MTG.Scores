@@ -1,0 +1,55 @@
+﻿@model MTG.Scores.Models.Match
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń</h2>
+
+<h3>Na pewno chcesz usunąć?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Gracz 1
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player1.Name)
+        </dd>
+
+        <dt>
+            Gracz 2
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player2.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Player1Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player1Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Player2Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player2Score)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger" /> |
+            @Html.ActionLink("Powrót do listy", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MTG.Scores.Models.Match>
+
+<table class="table" id="scores-table">
+  <thead>
+    <tr>
+      <th>
+        Gracz 1
+      </th>
+      <th>
+        Wynik
+      </th>
+      <th>
+        Gracz 2
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+
+  @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          <span class="text-center">@Html.DisplayFor(modelItem => item.Player1.Name)</span>
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Player1Score) : @Html.DisplayFor(modelItem => item.Player2Score)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Player2.Name)
+        </td>
+        <td>
+          @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+          @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
+        </td>
+      </tr>
+    }
+
+</table>

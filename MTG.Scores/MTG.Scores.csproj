@@ -153,6 +153,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -180,6 +181,7 @@
     <Content Include="Views\Scores\Delete.cshtml" />
     <Content Include="Views\Scores\Edit.cshtml" />
     <Content Include="Views\Scores\Index.cshtml" />
+    <Content Include="Views\Shared\ScoresTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

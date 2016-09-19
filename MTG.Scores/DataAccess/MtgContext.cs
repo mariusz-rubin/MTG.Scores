@@ -12,7 +12,6 @@ namespace MTG.Scores.DataAccess
   {
     public MtgContext() : base("MtgDbConnectionString")
     {
-      Database.SetInitializer<MtgContext>(new MtgDbInitializer());
     }
 
     public DbSet<Match> Matches { get; set; }

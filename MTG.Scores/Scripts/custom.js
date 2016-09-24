@@ -1,9 +1,10 @@
 ﻿function populateScores(playerId) {
   var scoresTable = $('#scores-table');
+  var url = $('#players-filter').attr("data-populate-scores-url");
 
   $.ajax({
     type: "POST",
-    url: '/Scores/PopulateScores',
+    url: url,
     data: {
       playerId: playerId
     },

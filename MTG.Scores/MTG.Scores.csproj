@@ -131,7 +131,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScoresController.cs" />
     <Compile Include="DataAccess\MtgContext.cs" />
-    <Compile Include="DataAccess\MtgDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

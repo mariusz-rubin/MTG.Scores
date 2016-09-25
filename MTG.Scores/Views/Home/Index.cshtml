@@ -13,6 +13,8 @@
         <th>Gracz</th>
         <th>Mecze</th>
         <th>Wygrane</th>
+        <th>Partie wygrane</th>
+        <th>Partie przegrane</th>
       </tr>
     </thead>
     <tbody>
@@ -21,8 +23,10 @@
         <tr>
           <td>@(i+1)</td>
           <td>@Model[i].Name</td>
-          <td>@Model[i].Matches</td>
-          <td>@Model[i].Wins</td>
+          <td class="important-stat">@Model[i].Matches</td>
+          <td class="important-stat">@Model[i].WonMatches</td>
+          <td>@Model[i].WonPoints</td>
+          <td>@Model[i].LostPoints</td>
         </tr>
       }
     </tbody>

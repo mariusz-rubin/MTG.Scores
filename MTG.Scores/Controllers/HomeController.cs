@@ -25,10 +25,20 @@ namespace MTG.Scores.Controllers
         var awayWins = player.AwayMatches.Where(x => x.Player2Score == 2 && x.Player2Score > x.Player1Score).Count();
         var wins = homeWins + awayWins;
 
-        rank.Add(new RankingRecord { Matches = games, Wins = wins, Name = player.Name } );
+        var wonPoints = wins * 2;
+        var lostPoints = player.HomeMatches.Sum(x => x.Player2Score) + player.AwayMatches.Sum(x => x.Player1Score);
+
+        rank.Add(
+          new RankingRecord {
+            Matches = games,
+            WonMatches = wins,
+            Name = player.Name,
+            LostPoints = lostPoints,
+            WonPoints = wonPoints
+          });
       }
 
-      rank = rank.OrderByDescending(x => x.Wins).ThenBy(x => x.Matches).ToList();
+      rank = rank.OrderByDescending(x => x.WonMatches).ThenBy(x => x.Matches).ThenBy(x => x.LostPoints).ToList();
 
       return View(rank);
     }

@@ -1,0 +1,43 @@
+﻿@model ScoresFiltered
+
+<table class="table" id="scores-table">
+  <thead>
+    <tr>
+      <th>
+        Gracz 1
+      </th>
+      <th>
+        Wynik
+      </th>
+      <th>
+        Gracz 2
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+
+  @foreach (var item in Model.Scores)
+    {
+      <tr class="@(item.Winner ? "success" : "danger")">
+        <td>
+          <span class="@(Model.SelectedPlayerId == item.Match.Player1ID ? "selected-player" : "")">
+            @Html.DisplayFor(modelItem => item.Match.Player1.Name)
+          </span>
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Match.Player1Score) : @Html.DisplayFor(modelItem => item.Match.Player2Score)
+        </td>
+        <td>
+          <span class="@(Model.SelectedPlayerId == item.Match.Player2ID ? "selected-player" : "")">
+            @Html.DisplayFor(modelItem => item.Match.Player2.Name)
+          </span>
+        </td>
+        <td>
+          @Html.ActionLink("Edytuj", "Edit", new { id = item.Match.ID }) |
+          @Html.ActionLink("Usuń", "Delete", new { id = item.Match.ID })
+        </td>
+      </tr>
+    }
+
+</table>

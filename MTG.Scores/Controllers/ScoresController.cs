@@ -25,21 +25,25 @@ namespace MTG.Scores.Controllers
     {
       var matches = db.Matches.Include(m => m.Player1).Include(m => m.Player2);
 
-      if (playerId != null && playerId != 0)
+      if (playerId == null)
       {
-        matches = matches.Where(x => x.Player1ID == playerId || x.Player2ID == playerId); 
+        return PartialView("ScoresTable", matches);
       }
 
-      return PartialView("ScoresTable", matches);
-    }
+      var scoresFiltered = new Models.View.ScoresFiltered() { SelectedPlayerId = playerId.Value };
 
-    private dynamic CreatePlayerSelectListItems()
-    {
-      var playersFilter = new List<SelectListItem>();
-      playersFilter.Add(new SelectListItem { Text = "Wszyscy gracze ", Value = "0"});
-      playersFilter.AddRange(db.Players.Select(x => new SelectListItem { Text = x.Name, Value = x.ID.ToString() }));
+      scoresFiltered.Scores =
+        matches
+        .Where(x => x.Player1ID == playerId || x.Player2ID == playerId)
+        .Select(y => new Models.View.Score { Match = y})
+        .ToList();
 
-      return playersFilter;
+      foreach (var score in scoresFiltered.Scores)
+      {
+        score.Winner = IsWinner(score.Match, playerId.Value);
+      }
+
+      return PartialView("ScoresTableFiltered", scoresFiltered);
     }
 
     // GET: Matches/Create
@@ -137,6 +141,26 @@ namespace MTG.Scores.Controllers
         db.Dispose();
       }
       base.Dispose(disposing);
+    }
+
+    private bool IsWinner(Match y, int playerId)
+    {
+      if (y.Player1Score == 2 && playerId == y.Player1ID
+        || y.Player2Score == 2 && playerId == y.Player2ID)
+      {
+        return true;
+      }
+
+      return false;
+    }
+
+    private dynamic CreatePlayerSelectListItems()
+    {
+      var playersFilter = new List<SelectListItem>();
+      playersFilter.Add(new SelectListItem { Text = "Wszyscy gracze ", Value = null });
+      playersFilter.AddRange(db.Players.Select(x => new SelectListItem { Text = x.Name, Value = x.ID.ToString() }));
+
+      return playersFilter;
     }
   }
 }

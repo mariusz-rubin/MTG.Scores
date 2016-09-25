@@ -46,3 +46,8 @@ textarea {
 .table td, .table th {
   text-align: center;
 }
+
+.selected-player{
+  font-weight: bold;
+  font-size: 16px;
+}

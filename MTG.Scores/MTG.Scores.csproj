@@ -143,6 +143,8 @@
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\View\RankingRecord.cs" />
+    <Compile Include="Models\View\Score.cs" />
+    <Compile Include="Models\View\ScoresFiltered.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +189,7 @@
     <Content Include="Views\Scores\Edit.cshtml" />
     <Content Include="Views\Scores\Index.cshtml" />
     <Content Include="Views\Shared\ScoresTable.cshtml" />
+    <Content Include="Views\Shared\ScoresTableFiltered.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

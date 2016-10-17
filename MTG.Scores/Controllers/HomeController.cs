@@ -25,7 +25,7 @@ namespace MTG.Scores.Controllers
         var awayWins = player.AwayMatches.Where(x => x.Player2Score == 2 && x.Player2Score > x.Player1Score).Count();
         var wins = homeWins + awayWins;
 
-        var wonPoints = wins * 2;
+        var wonPoints = player.HomeMatches.Sum(x => x.Player1Score) + player.AwayMatches.Sum(x => x.Player2Score);
         var lostPoints = player.HomeMatches.Sum(x => x.Player2Score) + player.AwayMatches.Sum(x => x.Player1Score);
 
         rank.Add(

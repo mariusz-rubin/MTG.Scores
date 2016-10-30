@@ -34,12 +34,17 @@ namespace MTG.Scores.Controllers
             WonMatches = wins,
             Name = player.Name,
             LostPoints = lostPoints,
-            WonPoints = wonPoints
+            WonPoints = wonPoints,
+            PointsRatio = wonPoints - lostPoints
           });
       }
 
-      rank = rank.OrderByDescending(x => x.WonMatches).ThenBy(x => x.Matches).ThenBy(x => x.LostPoints).ToList();
-
+      rank = rank.OrderByDescending(x => x.WonMatches)
+                 .ThenBy(x => x.Matches)
+                 .ThenByDescending(x => x.PointsRatio)
+                 .ThenByDescending(x => x.WonPoints)
+                 .ToList();
+      
       return View(rank);
     }
   }

@@ -8,6 +8,8 @@
 
     public int WonMatches { get; set; }
 
+    public int LostMatches { get; set; }
+
     public int WonPoints { get; set; }
 
     public int LostPoints { get; set; }

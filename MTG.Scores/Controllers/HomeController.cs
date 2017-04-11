@@ -21,9 +21,10 @@ namespace MTG.Scores.Controllers
       {
         var games = player.HomeMatches.Count + player.AwayMatches.Count;
 
-        var homeWins = player.HomeMatches.Where(x => x.Player1Score == 2 && x.Player1Score > x.Player2Score).Count();
-        var awayWins = player.AwayMatches.Where(x => x.Player2Score == 2 && x.Player2Score > x.Player1Score).Count();
-        var wins = homeWins + awayWins;
+        var homeWins = player.HomeMatches.Count(x => x.Player1Score == 2 && x.Player1Score > x.Player2Score);
+        var awayWins = player.AwayMatches.Count(x => x.Player2Score == 2 && x.Player2Score > x.Player1Score);
+        var wonMatches = homeWins + awayWins;
+        var lostMatches = games - wonMatches;
 
         var wonPoints = player.HomeMatches.Sum(x => x.Player1Score) + player.AwayMatches.Sum(x => x.Player2Score);
         var lostPoints = player.HomeMatches.Sum(x => x.Player2Score) + player.AwayMatches.Sum(x => x.Player1Score);
@@ -31,7 +32,8 @@ namespace MTG.Scores.Controllers
         rank.Add(
           new RankingRecord {
             Matches = games,
-            WonMatches = wins,
+            WonMatches = wonMatches,
+            LostMatches = lostMatches,
             Name = player.Name,
             LostPoints = lostPoints,
             WonPoints = wonPoints,

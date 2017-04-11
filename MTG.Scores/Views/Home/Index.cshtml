@@ -1,8 +1,9 @@
 ﻿@model List<RankingRecord>
 @{
-    ViewBag.Title = "Tabela";
+  ViewBag.Title = "Tabela";
 }
-<div class="jumbotron">
+<div class="jumbotron title-panel">
+  <img src="~/Content/img/AetherRevolt.png" />
   <h1 class="text-center">@ViewBag.Title</h1>
 </div>
 <div class="row">
@@ -13,18 +14,20 @@
         <th>Gracz</th>
         <th>Mecze</th>
         <th>Wygrane</th>
+        <th>Przegrane</th>
         <th>Partie wygrane</th>
         <th>Partie przegrane</th>
       </tr>
     </thead>
     <tbody>
-      @for(int i = 0; i < Model.Count; i++)
+      @for (int i = 0; i < Model.Count; i++)
       {
         <tr>
-          <td>@(i+1)</td>
+          <td>@(i + 1)</td>
           <td>@Model[i].Name</td>
           <td class="important-stat">@Model[i].Matches</td>
           <td class="important-stat">@Model[i].WonMatches</td>
+          <td class="important-stat">@Model[i].LostMatches</td>
           <td>@Model[i].WonPoints</td>
           <td>@Model[i].LostPoints</td>
         </tr>

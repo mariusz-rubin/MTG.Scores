@@ -49,9 +49,9 @@ textarea {
 
 .title-panel img {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: 50%;
+  top: 10px;
+  right: 10px;
+  height: 15%;
   width: auto;
   max-height: 90px;
 }
@@ -68,10 +68,4 @@ textarea {
 .important-stat{
   font-weight: bold;
   font-size: 16px;
-}
-
-@media (max-width: 767px){
-  .title-panel img {
-    max-height: 65px;
-  }
 }

@@ -12,8 +12,8 @@
 
     public int WonPoints { get; set; }
 
-    public int LostPoints { get; set; }
+    public int WonSets { get; set; }
 
-    public int PointsRatio { get; set; }
+    public int LostSets { get; set; }
   }
 }

@@ -12,11 +12,12 @@
       <tr>
         <th>#</th>
         <th>Gracz</th>
+        <th>Punkty</th>
+        <th>Wygrane sety</th>
+        <th>Przegrane sety</th>
         <th>Mecze</th>
-        <th>Wygrane</th>
-        <th>Przegrane</th>
-        <th>Partie wygrane</th>
-        <th>Partie przegrane</th>
+        <th>Wygrane mecze</th>
+        <th>Przegrane mecze</th>
       </tr>
     </thead>
     <tbody>
@@ -25,11 +26,12 @@
         <tr>
           <td>@(i + 1)</td>
           <td>@Model[i].Name</td>
+          <td class="important-stat">@Model[i].WonPoints</td>
+          <td class="important-stat">@Model[i].WonSets</td>
+          <td class="important-stat">@Model[i].LostSets</td>
           <td class="important-stat">@Model[i].Matches</td>
           <td class="important-stat">@Model[i].WonMatches</td>
           <td class="important-stat">@Model[i].LostMatches</td>
-          <td>@Model[i].WonPoints</td>
-          <td>@Model[i].LostPoints</td>
         </tr>
       }
     </tbody>

@@ -2,7 +2,6 @@
 using MTG.Scores.Models.View;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Data.Entity;
 using System.Linq;
 
 namespace MTG.Scores.Controllers
@@ -26,28 +25,41 @@ namespace MTG.Scores.Controllers
         var wonMatches = homeWins + awayWins;
         var lostMatches = games - wonMatches;
 
-        var wonPoints = player.HomeMatches.Sum(x => x.Player1Score) + player.AwayMatches.Sum(x => x.Player2Score);
-        var lostPoints = player.HomeMatches.Sum(x => x.Player2Score) + player.AwayMatches.Sum(x => x.Player1Score);
+        var wonHomePoints = player.HomeMatches.Sum(x => GetMatchPoints(x.Player1Score, x.Player2Score));
+        var wonAwayPoints = player.AwayMatches.Sum(x => GetMatchPoints(x.Player2Score, x.Player1Score));
+        var wonPoints = wonHomePoints + wonAwayPoints;
+
+        var wonSets = player.HomeMatches.Sum(x => x.Player1Score) + player.AwayMatches.Sum(x => x.Player2Score);
+        var lostSets = player.HomeMatches.Sum(x => x.Player2Score) + player.AwayMatches.Sum(x => x.Player1Score);
 
         rank.Add(
           new RankingRecord {
+            Name = player.Name,
+            WonPoints = wonPoints,
+            WonSets = wonSets,
+            LostSets = lostSets,
             Matches = games,
             WonMatches = wonMatches,
             LostMatches = lostMatches,
-            Name = player.Name,
-            LostPoints = lostPoints,
-            WonPoints = wonPoints,
-            PointsRatio = wonPoints - lostPoints
           });
       }
 
-      rank = rank.OrderByDescending(x => x.WonMatches)
-                 .ThenBy(x => x.Matches)
-                 .ThenByDescending(x => x.PointsRatio)
-                 .ThenByDescending(x => x.WonPoints)
+      rank = rank.OrderByDescending(x => x.WonPoints)
+                 .ThenByDescending(x => x.WonSets)
+                 .ThenBy(x => x.Name)
                  .ToList();
-      
+
       return View(rank);
+    }
+
+    private static int GetMatchPoints(int wonSets, int lostSets)
+    {
+      if (wonSets == 2)
+      {
+        return lostSets == 0 ? 3 : 2;
+      }
+
+      return wonSets;
     }
   }
 }

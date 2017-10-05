@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@ViewBag.Title - MTG Scores</title>
+  <title>@ViewBag.Title - Squash Scores</title>
   @Styles.Render("~/Content/css")
   @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,7 +17,7 @@
           <span class="icon-bar"></span>
         </button>
         <a href='@Url.Action("Index", "Home")' class="navbar-brand">
-          <img src='@Url.Content("~/Content/img/logo.png")' />
+          <img src='@Url.Content("~/Content/img/squashclub.png")' />
         </a>
       </div>
       <div class="navbar-collapse collapse">
@@ -32,9 +32,6 @@
   <div class="container body-content">
     @RenderBody()
     <hr />
-    <footer>
-      <p>&copy; @DateTime.Now.Year - MTG</p>
-    </footer>
   </div>
 
   @Scripts.Render("~/bundles/jquery")
